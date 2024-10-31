@@ -4,10 +4,86 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Form Welcome</title>
-        <script href="js/formwelcome.js"></script>
         <link rel="stylesheet" href="css/formwelcome.css">
     </head>
     <body>
-        
+        <div class="formwelcome">
+            <div class="formwelcome--background"></div>
+            <div class="formwelcome--content">
+                <div class="formwelcome--title">
+                    <h1>POSTECH - FULLSTACK</h1>
+                    <p>Desafio aula inaugural</p>
+                </div>
+                <form id="fiap-form">
+                    <div class="formwelcomeContent--box">
+                        <div class="formwelcomeContent--title">
+                            Informações do grupo
+                        </div>
+
+                        <label for="student1">Nome</label>
+                        <input type="text" id="student1" class="formwelcomeContent--input">
+
+                        <label for="student2">Nome</label>
+                        <input type="text" id="student2" class="formwelcomeContent--input">
+
+                        <label for="student3">Nome</label>
+                        <input type="text" id="student3" class="formwelcomeContent--input">
+
+                        <label for="student4">Nome</label>
+                        <input type="text" id="student4" class="formwelcomeContent--input">
+
+                        <label for="student5">Nome</label>
+                        <input type="text" id="student5" class="formwelcomeContent--input">
+
+                        <label for="historia">História do grupo</label>
+                        <textarea name="" id="message" class="formwelcomeContent--textarea"></textarea>
+                    </div>
+                    <div class="formwelcome--button-section">
+                    <button class="formwelcome--button" type="button" onclick="submitForm()">Enviar</button>
+                </div>
+                </form>
+            </div>
+            
+        </div>
     </body>
+    <script>
+        function submitForm(){
+            event.preventDefault(); 
+            // Inputs
+            const student1 = document.getElementById('student1').value;
+            const student2 = document.getElementById('student2').value;
+            const student3 = document.getElementById('student3').value;
+            const student4 = document.getElementById('student4').value;
+            const student5 = document.getElementById('student5').value;
+            const message = document.getElementById('message').value;
+
+            // Criando um objeto com os dados a serem enviados
+            const data = {
+                "names": [
+                    student1, student2, student3, student4, student5
+                ],
+                message
+            }
+            const url = "https://fsdt-contact.onrender.com/contact";
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro na requisição");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Resposta:", data);
+            })    
+            .catch(error => {
+                console.error("Erro:", error);
+            });
+        }
+    </script>
 </html>
