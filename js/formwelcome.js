@@ -29,12 +29,13 @@ function submitForm(){
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error("Erro na requisição");
+            alert('Erro ao realizar a requisição.   ')
         }
         return response.json();
     })
     .then(data => {
         console.log("Resposta:", data);
+        alert('Nomes e mensagem enviados com sucesso!')
     })    
     .catch(error => {
         console.error("Erro:", error);

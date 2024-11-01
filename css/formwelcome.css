@@ -63,6 +63,7 @@ html, body{
     text-align: center;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .formwelcomeContent--input{
